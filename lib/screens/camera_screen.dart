@@ -125,10 +125,6 @@ class _CameraScreenState extends State<CameraScreen> {
                       const OverlayWithRectangleClipping(),
                       ApiContainer(result: apiResult),
                       Align(
-                        alignment: Alignment.bottomLeft,
-                        child: _experimentalButton(),
-                      ),
-                      Align(
                         alignment: Alignment.bottomCenter,
                         child: _buildApiButton(),
                       ),
@@ -387,18 +383,4 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
-}
-
-Widget _experimentalButton() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(),
-    child: IconButton(
-      iconSize: 30,
-      onPressed: () {},
-      icon: const Icon(
-        Icons.construction,
-        color: Colors.white54,
-      ),
-    ),
-  );
 }
