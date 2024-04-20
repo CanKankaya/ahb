@@ -284,6 +284,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   });
                   return;
                 }
+
                 final image = await _controller?.takePicture();
 
                 if (image == null) {

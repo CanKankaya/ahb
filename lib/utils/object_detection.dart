@@ -23,18 +23,15 @@ class ObjectDetection {
 
     var timer = DateTime.now();
     if (compressed) {
-      // image = compressAndResizeImage(File(imagePath));
-
       var cropimage = img.decodeImage(image.readAsBytesSync())!;
-
       log(viewPadding?.top.toString() ?? 'null');
 
       croppedImage = img.copyCrop(
         cropimage,
         x: cropimage.width ~/ 5,
-        y: ((cropimage.height * 0.25) + 24 - (viewPadding?.top ?? 24)).toInt(),
+        y: (cropimage.height * 0.20).toInt(),
         width: (cropimage.width * 0.6).toInt(),
-        height: ((cropimage.height * 0.08) + 16).toInt(),
+        height: (cropimage.height * 0.12).toInt(),
       );
     }
     log('Time taken to process cropping: ${DateTime.now().difference(timer).inMilliseconds} ms');
