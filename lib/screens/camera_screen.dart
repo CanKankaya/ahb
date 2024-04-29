@@ -128,11 +128,11 @@ class _CameraScreenState extends State<CameraScreen> {
                         alignment: Alignment.bottomCenter,
                         child: _buildApiButton(),
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: _buildCompressButton(),
-                      ),
-                      _buildApiTimer(),
+                      // Align(
+                      //   alignment: Alignment.bottomRight,
+                      //   child: _buildCompressButton(),
+                      // ),
+                      // _buildApiTimer(),
                       Positioned(
                         right: 0,
                         child: _buildFlashButton(),
@@ -157,23 +157,23 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  Widget _buildCompressButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(),
-      child: IconButton(
-        iconSize: 30,
-        onPressed: () async {
-          setState(() {
-            compressed = !compressed;
-          });
-        },
-        icon: Icon(
-          compressed ? Icons.compress : Icons.compress_outlined,
-          color: compressed ? Colors.amber : Colors.white54,
-        ),
-      ),
-    );
-  }
+  // Widget _buildCompressButton() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(),
+  //     child: IconButton(
+  //       iconSize: 30,
+  //       onPressed: () async {
+  //         setState(() {
+  //           compressed = !compressed;
+  //         });
+  //       },
+  //       icon: Icon(
+  //         compressed ? Icons.compress : Icons.compress_outlined,
+  //         color: compressed ? Colors.amber : Colors.white54,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Container _buildErrorBar() {
     return Container(
@@ -187,72 +187,72 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  Container _buildApiTimer() {
-    return Container(
-      margin: const EdgeInsets.all(4),
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Text(
-                'Compress Time: ',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                '${compressTimeDiff.inMilliseconds} ms',
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Text(
-                'API Time: ',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                '${apiTimeDiff.inMilliseconds} ms',
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Text(
-                'Total Time: ',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                '${timeDiff.inMilliseconds} ms',
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 200, 200, 200),
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  // Container _buildApiTimer() {
+  //   return Container(
+  //     margin: const EdgeInsets.all(4),
+  //     padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+  //     child: Column(
+  //       children: [
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'Compress Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${compressTimeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 8),
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'API Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${apiTimeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 8),
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'Total Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${timeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Padding _buildApiButton() {
     return Padding(
@@ -321,9 +321,9 @@ class _CameraScreenState extends State<CameraScreen> {
                 var tempResult = await objectDetection?.runInferenceOnAPI(
                     imagePath: image.path, compressed: compressed);
 
-                compressTimeDiff = tempResult?['compressTimeDiff'] ?? const Duration();
-                apiTimeDiff = tempResult?['apiTimeDiff'] ?? const Duration();
-                timeDiff = compressTimeDiff + apiTimeDiff;
+                // compressTimeDiff = tempResult?['compressTimeDiff'] ?? const Duration();
+                // apiTimeDiff = tempResult?['apiTimeDiff'] ?? const Duration();
+                // timeDiff = compressTimeDiff + apiTimeDiff;
 
                 if (tempResult == null) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {

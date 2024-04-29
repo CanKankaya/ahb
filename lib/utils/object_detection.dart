@@ -13,15 +13,13 @@ class ObjectDetection {
   Future<Map<String, dynamic>?> runInferenceOnAPI(
       {required String imagePath, bool compressed = false}) async {
     log('Running inference on API...');
-
     //timer
-    var startTime = DateTime.now();
+    // var startTime = DateTime.now();
 
     var image = File(imagePath);
-
     img.Image? croppedImage;
 
-    var timer = DateTime.now();
+    // var timer = DateTime.now();
     if (compressed) {
       var cropimage = img.decodeImage(image.readAsBytesSync())!;
       log(viewPadding?.top.toString() ?? 'null');
@@ -34,43 +32,41 @@ class ObjectDetection {
         height: (cropimage.height * 0.12).toInt(),
       );
     }
-    log('Time taken to process cropping: ${DateTime.now().difference(timer).inMilliseconds} ms');
+    // log('Time taken to process cropping: ${DateTime.now().difference(timer).inMilliseconds} ms');
 
     //timer
-    var endTime = DateTime.now();
-    var compressTimeDiff = endTime.difference(startTime);
-
-    log('Time taken to compress and resize image: ${compressTimeDiff.inMilliseconds} ms');
-
-    startTime = DateTime.now();
+    // var endTime = DateTime.now();
+    // var compressTimeDiff = endTime.difference(startTime);
+    // log('Time taken to compress and resize image: ${compressTimeDiff.inMilliseconds} ms');
+    // startTime = DateTime.now();
 
     http.MultipartRequest request;
 
-    if (!compressed) {
-      request = http.MultipartRequest('POST', Uri.parse("$baseApiUrl/predict/"))
-        ..files.add(await http.MultipartFile.fromPath(
-          'file',
-          image.path,
-          contentType: MediaType('image', 'jpeg'),
-        ));
-    } else {
-      request = http.MultipartRequest('POST', Uri.parse("$baseApiUrl/predict/"))
-        ..files.add(http.MultipartFile.fromBytes(
-          'file',
-          img.encodeJpg(croppedImage!),
-          filename: 'image.jpg',
-          contentType: MediaType('image', 'jpeg'),
-        ));
-    }
+    // if (!compressed) {
+    //   request = http.MultipartRequest('POST', Uri.parse("$baseApiUrl/predict/"))
+    //     ..files.add(await http.MultipartFile.fromPath(
+    //       'file',
+    //       image.path,
+    //       contentType: MediaType('image', 'jpeg'),
+    //     ));
+    // } else {
+    request = http.MultipartRequest('POST', Uri.parse("$baseApiUrl/predict/"))
+      ..files.add(http.MultipartFile.fromBytes(
+        'file',
+        img.encodeJpg(croppedImage!),
+        filename: 'image.jpg',
+        contentType: MediaType('image', 'jpeg'),
+      ));
+    // }
 
     //request to send the cropped image
 
     var response = await request.send();
 
     //timer
-    endTime = DateTime.now();
-    var apiTimeDiff = endTime.difference(startTime);
-    log('Time taken to send request: ${apiTimeDiff.inMilliseconds} ms');
+    // endTime = DateTime.now();
+    // var apiTimeDiff = endTime.difference(startTime);
+    // log('Time taken to send request: ${apiTimeDiff.inMilliseconds} ms');
 
     if (response.statusCode == 200) {
       log('Response: 200');
@@ -84,8 +80,8 @@ class ObjectDetection {
           'prediction': List<int>.from(
             jsonResponse['prediction'].map((x) => x as int),
           ),
-          'apiTimeDiff': apiTimeDiff,
-          'compressTimeDiff': compressTimeDiff,
+          'apiTimeDiff': 0,
+          'compressTimeDiff': 0,
         };
       } else {
         return null;
@@ -94,35 +90,5 @@ class ObjectDetection {
       log('Error: ${response.statusCode}');
       return null;
     }
-  }
-
-  File compressAndResizeImage(File file) {
-    img.Image image = img.decodeImage(file.readAsBytesSync())!;
-
-    int width;
-    int height;
-
-    if (image.width > image.height) {
-      width = 640;
-      height = (image.height / image.width * 640).round();
-    } else {
-      height = 640;
-      width = (image.width / image.height * 640).round();
-    }
-
-    img.Image resizedImage = img.copyResize(image, width: width, height: height);
-
-    // Compress the image with JPEG format
-    List<int> compressedBytes =
-        img.encodeJpg(resizedImage, quality: 20); // Adjust quality as needed
-
-    // Save the compressed image to a file
-    File compressedFile = File(file.path.replaceFirst('.jpg', '_compressed.jpg'));
-    compressedFile.writeAsBytesSync(compressedBytes);
-
-    // log(file.lengthSync().toString());
-    // log(compressedFile.lengthSync().toString());
-
-    return compressedFile;
   }
 }
