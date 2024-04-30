@@ -157,24 +157,6 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  // Widget _buildCompressButton() {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(),
-  //     child: IconButton(
-  //       iconSize: 30,
-  //       onPressed: () async {
-  //         setState(() {
-  //           compressed = !compressed;
-  //         });
-  //       },
-  //       icon: Icon(
-  //         compressed ? Icons.compress : Icons.compress_outlined,
-  //         color: compressed ? Colors.amber : Colors.white54,
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Container _buildErrorBar() {
     return Container(
       color: Colors.red,
@@ -186,73 +168,6 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
-
-  // Container _buildApiTimer() {
-  //   return Container(
-  //     margin: const EdgeInsets.all(4),
-  //     padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           children: [
-  //             const Text(
-  //               'Compress Time: ',
-  //               style: TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 14,
-  //               ),
-  //             ),
-  //             Text(
-  //               '${compressTimeDiff.inMilliseconds} ms',
-  //               style: const TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 16,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //         const SizedBox(height: 8),
-  //         Row(
-  //           children: [
-  //             const Text(
-  //               'API Time: ',
-  //               style: TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 14,
-  //               ),
-  //             ),
-  //             Text(
-  //               '${apiTimeDiff.inMilliseconds} ms',
-  //               style: const TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 16,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //         const SizedBox(height: 8),
-  //         Row(
-  //           children: [
-  //             const Text(
-  //               'Total Time: ',
-  //               style: TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 14,
-  //               ),
-  //             ),
-  //             Text(
-  //               '${timeDiff.inMilliseconds} ms',
-  //               style: const TextStyle(
-  //                 color: Color.fromARGB(255, 200, 200, 200),
-  //                 fontSize: 16,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Padding _buildApiButton() {
     return Padding(
@@ -384,4 +299,89 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
+
+  // Container _buildApiTimer() {
+  //   return Container(
+  //     margin: const EdgeInsets.all(4),
+  //     padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+  //     child: Column(
+  //       children: [
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'Compress Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${compressTimeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 8),
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'API Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${apiTimeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(height: 8),
+  //         Row(
+  //           children: [
+  //             const Text(
+  //               'Total Time: ',
+  //               style: TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 14,
+  //               ),
+  //             ),
+  //             Text(
+  //               '${timeDiff.inMilliseconds} ms',
+  //               style: const TextStyle(
+  //                 color: Color.fromARGB(255, 200, 200, 200),
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+// Widget _buildCompressButton() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(),
+  //     child: IconButton(
+  //       iconSize: 30,
+  //       onPressed: () async {
+  //         setState(() {
+  //           compressed = !compressed;
+  //         });
+  //       },
+  //       icon: Icon(
+  //         compressed ? Icons.compress : Icons.compress_outlined,
+  //         color: compressed ? Colors.amber : Colors.white54,
+  //       ),
+  //     ),
+  //   );
+  // }
 }
