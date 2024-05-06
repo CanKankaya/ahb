@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:ahb/constants/device_sizes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:connectivity/connectivity.dart';
@@ -14,6 +13,8 @@ import 'package:ahb/widgets/custom_clipper.dart';
 import 'package:ahb/widgets/custom_error_message.dart';
 import 'package:ahb/widgets/simpler_custom_loading.dart';
 
+import 'package:ahb/constants/device_sizes.dart';
+
 class CameraScreen extends StatefulWidget {
   const CameraScreen({
     Key? key,
@@ -26,7 +27,7 @@ class CameraScreen extends StatefulWidget {
   State<CameraScreen> createState() => _CameraScreenState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
   StreamSubscription<ConnectivityResult>? _connectivitySubscription;
@@ -40,30 +41,44 @@ class _CameraScreenState extends State<CameraScreen> {
   ObjectDetection? objectDetection;
   List<int> apiResult = [];
 
-  var compressTimeDiff = const Duration();
-  var apiTimeDiff = const Duration();
-  var timeDiff = const Duration();
-
+  // var compressTimeDiff = const Duration();
+  // var apiTimeDiff = const Duration();
+  // var timeDiff = const Duration();
+  var backgroundTime = DateTime.now();
   @override
   void dispose() {
     _controller?.dispose();
     _connectivitySubscription?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.paused) {
+      backgroundTime = DateTime.now();
+      return;
+    }
+    if (state == AppLifecycleState.resumed) {
+      if (DateTime.now().difference(backgroundTime) > const Duration(seconds: 50)) {
+        _checkCameraPermission();
+      }
+      return;
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       size = MediaQuery.of(context).size;
       viewPadding = MediaQuery.of(context).viewPadding;
-    });
-    _checkCameraPermission();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
       topPadding = MediaQuery.of(context).viewPadding.top == 0
           ? 24.0
           : MediaQuery.of(context).viewPadding.top;
     });
+    _checkCameraPermission();
   }
 
   Future<void> _checkCameraPermission() async {
