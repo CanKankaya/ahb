@@ -1,5 +1,7 @@
+//* Dart and Flutter packages
 import 'package:flutter/material.dart';
 
+//* Custom packages
 import 'package:permission_handler/permission_handler.dart';
 
 class CameraDeniedScreen extends StatefulWidget {

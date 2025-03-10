@@ -1,18 +1,19 @@
+//*Dart and Flutter packages
 import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
-import 'package:connectivity/connectivity.dart';
+//*Custom packages
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+//*Local files
 import 'package:ahb/utils/object_detection.dart';
-
 import 'package:ahb/widgets/api_container.dart';
 import 'package:ahb/widgets/custom_clipper.dart';
 import 'package:ahb/widgets/custom_error_message.dart';
 import 'package:ahb/widgets/simpler_custom_loading.dart';
-
 import 'package:ahb/constants/device_sizes.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
   var _isLoading = false;
   var _flashMode = FlashMode.off;
@@ -108,9 +109,9 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
       );
 
       _connectivitySubscription =
-          Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+          Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
         setState(() {
-          _isOnline = result != ConnectivityResult.none;
+          _isOnline = result.isNotEmpty && result.first != ConnectivityResult.none;
         });
       });
     }

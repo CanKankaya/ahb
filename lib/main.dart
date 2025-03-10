@@ -1,10 +1,13 @@
+//* Dart and Flutter packages
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+//* Custom packages
 import 'package:camera/camera.dart';
 
+//* Local files
 import 'package:ahb/screens/camera_denied_screen.dart';
 import 'package:ahb/screens/camera_screen.dart';
-import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,12 +1,15 @@
+//* Dart and Flutter packages
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:ahb/constants/device_sizes.dart';
+//* Dart and Flutter packages
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:http_parser/http_parser.dart';
 
+//* Custom packages
+import 'package:ahb/constants/device_sizes.dart';
 import 'package:ahb/constants/api.dart';
 
 class ObjectDetection {

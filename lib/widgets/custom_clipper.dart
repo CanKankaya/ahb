@@ -39,19 +39,20 @@ class RectanglePainter extends CustomPainter {
         Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height)),
         //bellow clips out the circular rectangle with center as offset and dimensions you need to set
         Path()
-          ..addRRect(
-            RRect.fromRectAndRadius(
-              Rect.fromCenter(
-                center: Offset(
-                  size.width * 0.5,
-                  size.height * 0.25,
-                ), // Adjust the y-coordinate here
-                width: size.width * 0.6,
-                height: size.height * 0.08,
-              ),
-              const Radius.circular(16),
-            ),
-          )
+          //TODO Check this change, I removed this code and it should work the same
+          // ..addRRect(
+          //   RRect.fromRectAndRadius(
+          //     Rect.fromCenter(
+          //       center: Offset(
+          //         size.width * 0.5,
+          //         size.height * 0.25,
+          //       ), // Adjust the y-coordinate here
+          //       width: size.width * 0.6,
+          //       height: size.height * 0.08,
+          //     ),
+          //     const Radius.circular(16),
+          //   ),
+          // )
           ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(16)))
           ..close(),
       ),
